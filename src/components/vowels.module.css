@@ -1,0 +1,23 @@
+.english {
+  font-size: 1.1rem;
+}
+
+.korean {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.container {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  height: 50vh;
+  width: 50vh;
+  border-radius: 8px;
+}
+
+.heading {
+  background-color: #e0e0e0;
+  padding: 1rem;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
