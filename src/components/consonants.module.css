@@ -22,3 +22,15 @@
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
 }
+
+.consonantsGrid {
+  display: flex;
+  gap: 10px;
+  float: right;
+  padding-right: 1rem;
+}
+
+.consonantItem {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
