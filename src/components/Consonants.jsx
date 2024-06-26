@@ -4,12 +4,26 @@ import { hangeul } from '../HangeulData';
 
 export default function Consonants() {
 
-  const renderConsonants = () => {
-    return hangeul.consonants.slice(0, 5).map(consonant => (
-      <div key={consonant.id} className={styles.consonantItem}>
-        {consonant.char}
+  const groupConsonants = () => {
+    const groups = [];
+    for (let i = 0; i < hangeul.consonants.length; i += 5) {
+      groups.push(hangeul.consonants.slice(i, i + 5));
+    }
+
+    return (
+      <div>
+        {groups.map((group, index) => (
+          <div key={index}>
+            {group.map(consonant => (
+              <div key={consonant.id} className={styles.consonantItem}>
+                {consonant.char}
+              </div>
+            ))}
+            {index < groups.length - 1 && <hr className={styles.line} />}
+          </div>
+        ))}
       </div>
-    ));
+    );
   }
 
   return (
@@ -19,7 +33,7 @@ export default function Consonants() {
         <span className={styles.korean}>자음</span>
       </div>
       <div className={styles.consonantsGrid}>
-        {renderConsonants()}
+        {groupConsonants()}
       </div>
     </div>
   )

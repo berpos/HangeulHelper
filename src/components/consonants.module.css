@@ -10,7 +10,7 @@
 .container {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  height: 50vh;
+  height: 48vh;
   width: 50vh;
   border-radius: 8px;
 }
@@ -23,14 +23,16 @@
   border-top-left-radius: 8px;
 }
 
-.consonantsGrid {
-  display: flex;
-  gap: 10px;
-  float: right;
-  padding-right: 1rem;
+.consonantItem {
+  display: inline-block;
+  margin: 5px;
+  font-size: 2rem;
+  color: #333;
 }
 
-.consonantItem {
-  font-weight: bold;
-  font-size: 1.4rem;
+.line {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid #a1a1a1;
 }
