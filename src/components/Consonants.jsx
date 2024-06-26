@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from './consonants.module.css'
+import styles from './consonants.module.css';
 import { hangeul } from '../HangeulData';
 
 export default function Consonants() {
@@ -11,9 +11,10 @@ export default function Consonants() {
     }
 
     return (
-      <div>
+      <>
         {groups.map((group, index) => (
-          <div key={index}>
+          <div key={index} className={styles.containers}>
+            <button className={styles.btn}>Check</button>
             {group.map(consonant => (
               <div key={consonant.id} className={styles.consonantItem}>
                 {consonant.char}
@@ -22,7 +23,7 @@ export default function Consonants() {
             {index < groups.length - 1 && <hr className={styles.line} />}
           </div>
         ))}
-      </div>
+      </>
     );
   }
 

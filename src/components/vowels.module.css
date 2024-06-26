@@ -36,3 +36,28 @@
   margin-bottom: 10px;
   border-top: 1px solid #a1a1a1;
 }
+
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: #DF3333;
+  color: #fff;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: rgb(192, 41, 41);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  scale: 1.1;
+}
+
+.containers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}

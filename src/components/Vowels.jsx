@@ -13,7 +13,8 @@ export default function Vowels() {
     return (
       <div>
         {groups.map((group, index) => (
-          <div key={index}>
+          <div key={index} className={styles.containers}>
+            <button className={styles.btn}>Check</button>
             {group.map(vowel => (
               <div key={vowel.id} className={styles.vowelItem}>
                 {vowel.char}
