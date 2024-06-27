@@ -1,2 +1,3 @@
-Project made in react to help me practice the Korean alphabet  
+Made in React to help practice the Korean Alphabet.  
+Also for me to practice React.  
 Still in development
