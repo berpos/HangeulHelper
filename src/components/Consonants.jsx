@@ -33,7 +33,7 @@ export default function Consonants() {
         {groups.map((group, index) => (
           <div key={index} className={styles.containers}>
             <button className={styles.btn} onClick={() => handleClick(index)}>
-              {selectedGroupIndex.includes(index) ? 'Uncheck' : 'Check'}
+              {selectedGroupIndex.includes(index) ? 'Deselect' : 'Select'}
             </button>
             {group.map(consonant => (
               <p key={consonant.id} className={styles.consonantItem}>

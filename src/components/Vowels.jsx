@@ -34,7 +34,7 @@ export default function Vowels() {
         {groups.map((group, index) => (
           <div key={index} className={styles.containers}>
             <button className={styles.btn} onClick={() => handleClick(index)}>
-              {selectedGroupIndex.includes(index) ? 'Uncheck' : 'Check'}
+              {selectedGroupIndex.includes(index) ? 'Deselect' : 'Select'}
             </button>
             {group.map(vowel => (
               <p key={vowel.id} className={styles.vowelItem}>
