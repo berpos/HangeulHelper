@@ -34,21 +34,6 @@ export default function Consonants({ onClick, selectedGroups }) {
           </div>
         ))}
       </div>
-      {/* {selectedGroups.length > 0 && (
-        <div className={styles.flashcards}>
-          <h2>Selected Groups</h2>
-          {selectedGroups.map(selectedIndex => (
-            <div key={selectedIndex}>
-              {groups[selectedIndex].map(consonant => (
-                <div key={consonant.id} className={styles.flashcard}>
-                  {consonant.char}
-                </div>
-              ))}
-              <hr className={styles.line} />
-            </div>
-          ))}
-        </div>
-      )} */}
     </div>
   )
 }

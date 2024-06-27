@@ -35,21 +35,6 @@ export default function Vowels({ onClick, selectedGroups }) {
           </div>
         ))}
       </div>
-      {/* {selectedGroupIndex.length > 0 && (
-        <div className={styles.flashcards}>
-          <h2>Selected Groups</h2>
-          {selectedGroupIndex.map(selectedIndex => (
-            <div key={selectedIndex}>
-              {groups[selectedIndex].map(consonant => (
-                <div key={consonant.id} className={styles.flashcard}>
-                  {consonant.char}
-                </div>
-              ))}
-              <hr className={styles.line} />
-            </div>
-          ))}
-        </div>
-      )} */}
     </div>
   )
 }
