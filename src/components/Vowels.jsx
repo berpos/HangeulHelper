@@ -16,9 +16,9 @@ export default function Vowels() {
           <div key={index} className={styles.containers}>
             <button className={styles.btn}>Check</button>
             {group.map(vowel => (
-              <div key={vowel.id} className={styles.vowelItem}>
+              <p key={vowel.id} className={styles.vowelItem}>
                 {vowel.char}
-              </div>
+              </p>
             ))}
             {index < groups.length - 1 && <hr className={styles.line} />}
           </div>
