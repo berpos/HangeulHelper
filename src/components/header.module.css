@@ -11,3 +11,13 @@
   font-size: 2em;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
+
+.p{
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.p:hover {
+  scale: 1.1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
