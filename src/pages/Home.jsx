@@ -4,6 +4,7 @@ import Vowels from "../components/Vowels";
 import styles from '../components/home.module.css';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { hangeul } from '../HangeulData';
 
 export default function Home() {
   const [selectedConsonantGroups, setSelectedConsonantGroups] = useState([]);
@@ -26,8 +27,19 @@ export default function Home() {
     }
   };
 
+  const getSelectedCharacters = () => {
+    const selectedConsonants = selectedConsonantGroups.flatMap(groupIndex =>
+      hangeul.consonants.slice(groupIndex * 5, groupIndex * 5 + 5)
+    );
+    const selectedVowels = selectedVowelGroups.flatMap(groupIndex =>
+      hangeul.vowels.slice(groupIndex * 6, groupIndex * 6 + 6)
+    );
+    return [...selectedConsonants, ...selectedVowels];
+  };
+
   const startQuiz = () => {
-    navigate('/quiz', { state: { selectedConsonantGroups, selectedVowelGroups } });
+    const selectedCharacters = getSelectedCharacters();
+    navigate('/quiz', { state: { selectedCharacters } });
   };
 
   return (
