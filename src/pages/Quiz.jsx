@@ -27,7 +27,9 @@ export default function Quiz() {
   const generateQuestion = () => {
     if (currentQuestion >= 10 || !selectedCharacters || selectedCharacters.length < 1) return;
 
-    const character = selectedCharacters[currentQuestion];
+    // Select a random character
+    const randomIndex = Math.floor(Math.random() * selectedCharacters.length);
+    const character = selectedCharacters[randomIndex];
     if (!character) return;
 
     const correctAnswer = character.name;
@@ -61,15 +63,15 @@ export default function Quiz() {
   }, [currentQuestion]);
 
   const handleBack = () => {
-    navigate('/')
-  }
+    navigate('/');
+  };
 
   return (
     <>
       <Header />
       <div className={styles.quizContainer}>
         <div className={styles.insideContainer}>
-          {currentQuestion < 10 && character ? (
+          {currentQuestion <= 10 && character ? (
             <>
               <div className={styles.character}>
                 <h1>{character.char}</h1>
