@@ -1,70 +1,74 @@
-import Header from '../components/Header';
-import { useLocation } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import styles from './quiz.module.css';
-import { useNavigate } from 'react-router-dom';
+import { Header } from "../components/Header"
+import { useLocation } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import styles from "./quiz.module.css"
+import { useNavigate } from "react-router-dom"
 
-
-export default function Quiz() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { selectedCharacters } = location.state;
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [score, setScore] = useState(0);
-  const [character, setCharacter] = useState(null);
-  const [options, setOptions] = useState([]);
+export const Quiz = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { selectedCharacters } = location.state
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [score, setScore] = useState(0)
+  const [character, setCharacter] = useState(null)
+  const [options, setOptions] = useState([])
 
   // Function to shuffle an array (Fisher-Yates algorithm)
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[j]] = [array[j], array[i]]
     }
-    return array;
-  };
+    return array
+  }
 
   // Function to generate a question
   const generateQuestion = () => {
-    if (currentQuestion >= 10 || !selectedCharacters || selectedCharacters.length < 1) return;
+    if (
+      currentQuestion >= 10 ||
+      !selectedCharacters ||
+      selectedCharacters.length < 1
+    )
+      return
 
     // Select a random character
-    const randomIndex = Math.floor(Math.random() * selectedCharacters.length);
-    const character = selectedCharacters[randomIndex];
-    if (!character) return;
+    const randomIndex = Math.floor(Math.random() * selectedCharacters.length)
+    const character = selectedCharacters[randomIndex]
+    if (!character) return
 
-    const correctAnswer = character.name;
+    const correctAnswer = character.name
 
     // Generate two wrong answers
     let wrongAnswers = selectedCharacters
-      .filter(char => char.name !== correctAnswer)
-      .map(char => char.name);
+      .filter((char) => char.name !== correctAnswer)
+      .map((char) => char.name)
 
     // Shuffle and pick two wrong answers
-    wrongAnswers = shuffleArray(wrongAnswers).slice(0, 2);
+    wrongAnswers = shuffleArray(wrongAnswers).slice(0, 2)
 
     // Shuffle the correct answer with wrong answers
-    const options = shuffleArray([...wrongAnswers, correctAnswer]);
+    const options = shuffleArray([...wrongAnswers, correctAnswer])
 
-    setCharacter(character);
-    setOptions(options);
-  };
+    setCharacter(character)
+    setOptions(options)
+  }
 
   // Function to handle answer selection
   const handleAnswerClick = (answer) => {
     if (answer === character.name) {
-      setScore(score + 1);
+      setScore(score + 1)
     }
-    setCurrentQuestion(currentQuestion + 1);
-  };
+    setCurrentQuestion(currentQuestion + 1)
+  }
 
   // Generate a new question on component mount and when current question changes
   useEffect(() => {
-    generateQuestion();
-  }, [currentQuestion]);
+    generateQuestion()
+  }, [currentQuestion])
 
   const handleBack = () => {
-    navigate('/');
-  };
+    navigate("/")
+  }
 
   return (
     <>
@@ -92,11 +96,13 @@ export default function Quiz() {
             <div className={styles.results}>
               <h2>Quiz Finished!</h2>
               <p>Your Score: {score} / 10</p>
-              <button onClick={handleBack} className={styles.optionButton}>Go Back</button>
+              <button onClick={handleBack} className={styles.optionButton}>
+                Go Back
+              </button>
             </div>
           )}
         </div>
       </div>
     </>
-  );
+  )
 }

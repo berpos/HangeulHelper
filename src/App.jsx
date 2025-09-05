@@ -1,13 +1,9 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import './App.css'
-import Home from './pages/Home'
-import Quiz from './pages/Quiz'
-// import About from './pages/About';
-// import Contact from './pages/Contact';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import "./App.css"
+import { Home } from "./pages/Home"
+import { Quiz } from "./pages/Quiz"
 
-function App() {
-
+export const App = () => {
   return (
     <Router>
       <Routes>
@@ -17,5 +13,3 @@ function App() {
     </Router>
   )
 }
-
-export default App
