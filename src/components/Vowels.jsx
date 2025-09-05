@@ -1,18 +1,16 @@
-import styles from './vowels.module.css';
-import { hangeul } from '../HangeulData';
+import styles from "./vowels.module.css"
+import { hangeul } from "../HangeulData"
 
-
-export default function Vowels({ onClick, selectedGroups }) {
-
+export const Vowels = ({ onClick, selectedGroups }) => {
   const groupVowels = () => {
-    const groups = [];
+    const groups = []
     for (let i = 0; i < hangeul.vowels.length; i += 6) {
-      groups.push(hangeul.vowels.slice(i, i + 6));
+      groups.push(hangeul.vowels.slice(i, i + 6))
     }
-    return groups;
-  };
+    return groups
+  }
 
-  const groups = groupVowels();
+  const groups = groupVowels()
 
   return (
     <div className={styles.container}>
@@ -24,9 +22,9 @@ export default function Vowels({ onClick, selectedGroups }) {
         {groups.map((group, index) => (
           <div key={index} className={styles.containers}>
             <button className={styles.btn} onClick={() => onClick(index)}>
-              {selectedGroups.includes(index) ? 'Deselect' : 'Select'}
+              {selectedGroups.includes(index) ? "Deselect" : "Select"}
             </button>
-            {group.map(vowel => (
+            {group.map((vowel) => (
               <p key={vowel.id} className={styles.vowelItem}>
                 {vowel.char}
               </p>
