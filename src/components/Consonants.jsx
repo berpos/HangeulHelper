@@ -1,4 +1,4 @@
-import styles from "./consonants.module.css"
+import styles from "./consonants.module.scss"
 import { hangeul } from "../HangeulData"
 
 export const Consonants = ({ onClick, selectedGroups }) => {
