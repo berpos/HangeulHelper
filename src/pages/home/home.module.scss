@@ -47,6 +47,48 @@
     align-items: center;
 
     &__title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    &__subtitle {
+      font-size: 1.5rem;
+      color: #666;
+    }
+
+    &__book {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      background: #407fff;
+      background: linear-gradient(
+        150deg,
+        rgba(64, 127, 255, 1) 0%,
+        rgba(107, 157, 255, 0.49) 100%
+      );
+      border-radius: 0.6rem;
+      width: 5rem;
+      height: 5rem;
+
+      & > img {
+        width: 4rem;
+        height: 4rem;
+      }
+    }
+  }
+
+  &__content {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+    padding: 3rem;
+    height: auto;
+    min-width: 40rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &__title {
       font-size: 2rem;
       font-weight: bold;
       color: #333;
@@ -57,41 +99,35 @@
       color: #666;
     }
 
-    &__book {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-      background-color: #6b9dff;
+    &__start-quiz {
+      color: #fff;
+      background: #407fff;
+      background: linear-gradient(
+        90deg,
+        rgba(64, 127, 255, 1) 0%,
+        rgba(107, 157, 255, 0.49) 100%
+      );
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 0.8rem 0;
       border-radius: 0.6rem;
-      width: 4rem;
-      height: 4rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
 
-      & > img {
-        width: 3rem;
-        height: 3rem;
+      &:not(.disabled):hover {
+        transform: scale(1.05);
       }
     }
   }
 
-  &__content {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 1rem;
-    padding: 2rem;
-    height: auto;
-    width: auto;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-    &__title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #333;
-    }
-
-    &__subtitle {
-      font-size: 1rem;
-      color: #666;
-    }
+  &__footer {
+    font-size: 1.1rem;
+    color: #838383;
   }
+}
+
+.disabled {
+  cursor: default;
+  opacity: 0.5;
 }

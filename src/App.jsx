@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import "./App.scss"
-import { Home } from "./pages/Home"
-import { Quiz } from "./pages/Quiz"
+import { Home } from "./pages/home/Home"
+import { Quiz } from "./pages/quiz/Quiz"
 
 export const App = () => {
   return (
