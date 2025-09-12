@@ -1,7 +1,7 @@
 import { Header } from "../components/Header"
 import { useLocation } from "react-router-dom"
 import React, { useState, useEffect } from "react"
-import styles from "./quiz.module.css"
+import styles from "./quiz.module.scss"
 import { useNavigate } from "react-router-dom"
 
 export const Quiz = () => {

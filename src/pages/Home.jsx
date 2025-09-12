@@ -1,10 +1,12 @@
 import { Consonants } from "../components/Consonants"
 import { Header } from "../components/Header"
 import { Vowels } from "../components/Vowels"
-import styles from "../components/home.module.css"
+import styles from "../components/home.module.scss"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { hangeul } from "../HangeulData"
+import iconBook from "../assets/ico-book.svg"
+import icoBrain from "../assets/ico-brain.svg"
 
 export const Home = () => {
   const [selectedConsonantGroups, setSelectedConsonantGroups] = useState([])
@@ -45,8 +47,8 @@ export const Home = () => {
   }
 
   return (
-    <>
-      <Header />
+    <div className={styles["home-container"]}>
+      {/* <Header />
       <div className={styles.container}>
         <div className={styles.row}>
           <Consonants
@@ -63,7 +65,35 @@ export const Home = () => {
             Start Quiz
           </button>
         </div>
+      </div> */}
+      <div className={styles["home-container__header-container"]}>
+        <div className={styles["home-container__header-container__book"]}>
+          <img src={iconBook} alt="Icon Book" />
+        </div>
+        <span className={styles["home-container__header-container__title"]}>
+          한글 연습
+        </span>
+        <span className={styles["home-container__header-container__subtitle"]}>
+          Hangeul Practice
+        </span>
       </div>
-    </>
+      <div className={styles["home-container__content"]}>
+        <div className="d-flex flex-column">
+          <div className="d-flex align-items-center gap-2">
+            <img
+              src={icoBrain}
+              alt="Icon Brain"
+              style={{ width: "1.4rem", height: "1.4rem" }}
+            />
+            <span className={styles["home-container__content__title"]}>
+              Choose Practice Groups
+            </span>
+          </div>
+          <span className={styles["home-container__content__subtitle"]}>
+            Select which Korean characters you'd like to practice
+          </span>
+        </div>
+      </div>
+    </div>
   )
 }
