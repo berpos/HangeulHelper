@@ -1,0 +1,133 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.row {
+  display: flex;
+  gap: 4rem;
+}
+
+.btn {
+  border: none;
+  background-color: rgb(223, 51, 51);
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-top: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  scale: 1.1;
+  background-color: rgb(192, 41, 41);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.home-container {
+  height: 100vh;
+  width: 100%;
+  background-color: #f9f9fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  &__header-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    &__subtitle {
+      font-size: 1.5rem;
+      color: #666;
+    }
+
+    &__book {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      background: #407fff;
+      background: linear-gradient(
+        150deg,
+        rgba(64, 127, 255, 1) 0%,
+        rgba(107, 157, 255, 0.49) 100%
+      );
+      border-radius: 0.6rem;
+      width: 5rem;
+      height: 5rem;
+
+      & > img {
+        width: 4rem;
+        height: 4rem;
+      }
+    }
+  }
+
+  &__content {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+    padding: 2rem;
+    height: auto;
+    min-width: 40rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &__title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    &__subtitle {
+      font-size: 1rem;
+      color: #666;
+    }
+
+    &__start-quiz {
+      color: #fff;
+      background: #407fff;
+      background: linear-gradient(
+        90deg,
+        rgba(64, 127, 255, 1) 0%,
+        rgba(107, 157, 255, 0.49) 100%
+      );
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 0.8rem 0;
+      border-radius: 0.6rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:not(.disabled):hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__footer {
+    font-size: 1.1rem;
+    color: #838383;
+  }
+}
+
+.disabled {
+  cursor: default;
+  opacity: 0.5;
+}
