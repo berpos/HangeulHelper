@@ -1,19 +1,20 @@
-import { Header } from "../../components/header/Header"
-import { useLocation } from "react-router-dom"
 import React, { useState, useEffect } from "react"
+import { useNavigate, useLocation } from "react-router-dom"
 import styles from "./quiz.module.scss"
-import { useNavigate } from "react-router-dom"
+import icoBack from "../../assets/ico-back.svg"
 
 export const Quiz = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { selectedCharacters } = location.state
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [score, setScore] = useState(0)
-  const [character, setCharacter] = useState(null)
-  const [options, setOptions] = useState([])
+  const { selectedCharacters } = location.state || {}
 
-  // Function to shuffle an array (Fisher-Yates algorithm)
+  const [questions, setQuestions] = useState([])
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [selectedAnswer, setSelectedAnswer] = useState(null)
+  const [showResult, setShowResult] = useState(false)
+  const [score, setScore] = useState({ correct: 0, incorrect: 0 })
+
+  // Shuffle array
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
@@ -22,87 +23,150 @@ export const Quiz = () => {
     return array
   }
 
-  // Function to generate a question
-  const generateQuestion = () => {
-    if (
-      currentQuestion >= 10 ||
-      !selectedCharacters ||
-      selectedCharacters.length < 1
-    )
-      return
-
-    // Select a random character
-    const randomIndex = Math.floor(Math.random() * selectedCharacters.length)
-    const character = selectedCharacters[randomIndex]
-    if (!character) return
-
-    const correctAnswer = character.name
-
-    // Generate two wrong answers
-    let wrongAnswers = selectedCharacters
-      .filter((char) => char.name !== correctAnswer)
-      .map((char) => char.name)
-
-    // Shuffle and pick two wrong answers
-    wrongAnswers = shuffleArray(wrongAnswers).slice(0, 2)
-
-    // Shuffle the correct answer with wrong answers
-    const options = shuffleArray([...wrongAnswers, correctAnswer])
-
-    setCharacter(character)
-    setOptions(options)
-  }
-
-  // Function to handle answer selection
-  const handleAnswerClick = (answer) => {
-    if (answer === character.name) {
-      setScore(score + 1)
-    }
-    setCurrentQuestion(currentQuestion + 1)
-  }
-
-  // Generate a new question on component mount and when current question changes
+  // Generate quiz questions
   useEffect(() => {
-    generateQuestion()
-  }, [currentQuestion])
+    if (!selectedCharacters || selectedCharacters.length === 0) return
+
+    const generateQuestions = () => {
+      const numQuestions = Math.min(10, selectedCharacters.length)
+      const questionsList = []
+
+      for (let i = 0; i < numQuestions; i++) {
+        const randomChar =
+          selectedCharacters[
+            Math.floor(Math.random() * selectedCharacters.length)
+          ]
+        const correctAnswer = randomChar.name
+
+        let wrongAnswers = selectedCharacters
+          .filter((c) => c.name !== correctAnswer)
+          .map((c) => c.name)
+        wrongAnswers = shuffleArray(wrongAnswers).slice(0, 2)
+
+        const options = shuffleArray([...wrongAnswers, correctAnswer])
+
+        questionsList.push({
+          character: randomChar,
+          options,
+          correctAnswer,
+        })
+      }
+
+      setQuestions(questionsList)
+    }
+
+    generateQuestions()
+  }, [selectedCharacters])
+
+  const handleAnswerClick = (answer) => {
+    if (showResult) return
+    setSelectedAnswer(answer)
+    const isCorrect = answer === questions[currentIndex].correctAnswer
+    setScore((prev) => ({
+      ...prev,
+      [isCorrect ? "correct" : "incorrect"]:
+        prev[isCorrect ? "correct" : "incorrect"] + 1,
+    }))
+    setShowResult(true)
+  }
+
+  const handleNext = () => {
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex(currentIndex + 1)
+      setSelectedAnswer(null)
+      setShowResult(false)
+    } else {
+      navigate("/results", { state: { score } })
+    }
+  }
 
   const handleBack = () => {
     navigate("/")
   }
 
+  if (!questions.length) {
+    return (
+      <div className={styles["quiz-container"]}>
+        <div className={styles["quiz-loading"]}>Preparing your quiz...</div>
+      </div>
+    )
+  }
+
+  const current = questions[currentIndex]
+  const progress = ((currentIndex + 1) / questions.length) * 100
+
   return (
-    <>
-      <Header />
-      <div className={styles.quizContainer}>
-        <div className={styles.insideContainer}>
-          {currentQuestion <= 10 && character ? (
-            <>
-              <div className={styles.character}>
-                <h1>{character.char}</h1>
-              </div>
-              <div className={styles.options}>
-                {options.map((option, index) => (
-                  <button
-                    key={index}
-                    className={styles.optionButton}
-                    onClick={() => handleAnswerClick(option)}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className={styles.results}>
-              <h2>Quiz Finished!</h2>
-              <p>Your Score: {score} / 10</p>
-              <button onClick={handleBack} className={styles.optionButton}>
-                Go Back
-              </button>
-            </div>
-          )}
+    <div className={styles["quiz-container"]}>
+      <div className={styles["quiz-container__header"]}>
+        <div
+          className={styles["quiz-container__header__button-container"]}
+          onClick={handleBack}
+        >
+          <img src={icoBack} alt="Back" />
+          <span>Back</span>
+        </div>
+        <div className={styles["quiz-container__header__progress"]}>
+          Question {currentIndex + 1} / {questions.length}
         </div>
       </div>
-    </>
+      <div className={styles["quiz-container__progress-bar"]}>
+        <div
+          className={styles["quiz-container__progress-bar__fill"]}
+          style={{ width: `${progress}%` }}
+        ></div>
+      </div>
+
+      <div className={styles["quiz-container__question"]}>
+        <div className={styles["quiz-container__question__character"]}>
+          {console.log(current.character)}
+          {current.character.char}
+        </div>
+        <p className={styles["quiz-container__question__subtitle"]}>
+          What is the romanization of this character?
+        </p>
+      </div>
+
+      <div className={styles["quiz-container__options"]}>
+        {current.options.map((option, index) => {
+          let optionClass = styles["quiz-container__options__option-button"]
+          if (showResult) {
+            if (option === current.correctAnswer) {
+              optionClass += ` ${styles.correct}`
+            } else if (selectedAnswer === option) {
+              optionClass += ` ${styles.incorrect}`
+            }
+          }
+
+          return (
+            <button
+              key={index}
+              onClick={() => handleAnswerClick(option)}
+              className={optionClass}
+              disabled={showResult}
+            >
+              {option}
+            </button>
+          )
+        })}
+      </div>
+
+      {showResult && (
+        <div style={{ marginTop: "2rem" }}>
+          <button
+            onClick={handleNext}
+            className={styles["quiz-container__next-button"]}
+          >
+            {currentIndex < questions.length - 1
+              ? "Next Question"
+              : "View Results"}
+          </button>
+        </div>
+      )}
+
+      <div className={styles["quiz-container__score"]}>
+        <span>✅ {score.correct}</span>
+        <span>❌ {score.incorrect}</span>
+      </div>
+    </div>
   )
 }

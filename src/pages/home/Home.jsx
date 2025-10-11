@@ -1,5 +1,4 @@
 import { Consonants } from "../../components/consonants/Consonants"
-import { Header } from "../../components/header/Header"
 import { Vowels } from "../../components/vowels/Vowels"
 import styles from "./home.module.scss"
 import { useNavigate } from "react-router-dom"
