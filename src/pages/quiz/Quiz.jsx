@@ -28,7 +28,7 @@ export const Quiz = () => {
     if (!selectedCharacters || selectedCharacters.length === 0) return
 
     const generateQuestions = () => {
-      const numQuestions = Math.min(10, selectedCharacters.length)
+      const numQuestions = Math.min(14, selectedCharacters.length)
       const questionsList = []
 
       for (let i = 0; i < numQuestions; i++) {
@@ -162,11 +162,6 @@ export const Quiz = () => {
           </button>
         </div>
       )}
-
-      <div className={styles["quiz-container__score"]}>
-        <span>✅ {score.correct}</span>
-        <span>❌ {score.incorrect}</span>
-      </div>
     </div>
   )
 }
