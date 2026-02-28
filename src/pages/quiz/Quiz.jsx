@@ -122,7 +122,7 @@ export const Quiz = () => {
           {current.character.char}
         </div>
         <p className={styles["quiz-container__question__subtitle"]}>
-          What is the romanization of this character?
+          What is the sound of this character?
         </p>
       </div>
 
