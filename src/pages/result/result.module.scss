@@ -1,7 +1,7 @@
 .results-container {
   display: flex;
   background-color: #f9f9fa;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -62,7 +62,7 @@
     background: #fff;
     border-radius: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: auto;
+    width: min(34rem, 100%);
     text-align: center;
     height: auto;
     padding: 1rem 4rem;
@@ -166,6 +166,51 @@
     &__footer {
       color: #777;
       font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .results-container {
+    justify-content: flex-start;
+    padding: 1.5rem 1rem;
+
+    &__header {
+      margin-bottom: 1.25rem;
+
+      &__trophy {
+        width: 5rem;
+        height: 5rem;
+
+        & > img {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+      }
+
+      &__title {
+        font-size: 1.6rem;
+      }
+
+      &__subtitle {
+        text-align: center;
+        font-size: 1rem;
+      }
+    }
+
+    &__card {
+      padding: 1rem 1.2rem;
+
+      &__score {
+        &__circle {
+          width: 6.5rem;
+          height: 6.5rem;
+        }
+      }
+
+      &__stats {
+        flex-direction: column;
+      }
     }
   }
 }
