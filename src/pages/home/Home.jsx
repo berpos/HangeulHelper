@@ -1,5 +1,6 @@
 import { Consonants } from "../../components/consonants/Consonants"
 import { Vowels } from "../../components/vowels/Vowels"
+import { Syllables } from "../../components/syllables/Syllables"
 import styles from "./home.module.scss"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
@@ -9,9 +10,17 @@ import icoBrain from "../../assets/ico-brain.svg"
 
 export const Home = () => {
   const [selectedGroups, setSelectedGroups] = useState([])
+  const [showSyllablesWarning, setShowSyllablesWarning] = useState(false)
   const navigate = useNavigate()
 
   const handleGroupToggle = (group) => {
+    const isSelectingSyllables =
+      group === "syllables" && !selectedGroups.includes("syllables")
+
+    if (isSelectingSyllables) {
+      setShowSyllablesWarning(true)
+    }
+
     if (selectedGroups.includes(group)) {
       setSelectedGroups(selectedGroups.filter((g) => g !== group))
     } else {
@@ -26,13 +35,17 @@ export const Home = () => {
     const selectedVowels = selectedGroups.includes("vowels")
       ? hangeul.vowels
       : []
-    return [...selectedConsonants, ...selectedVowels]
+    const selectedSyllables = selectedGroups.includes("syllables")
+      ? hangeul.syllables
+      : []
+
+    return [...selectedConsonants, ...selectedVowels, ...selectedSyllables]
   }
 
   const startQuiz = () => {
     const selectedCharacters = getSelectedCharacters()
     if (selectedCharacters.length > 0) {
-      navigate("/quiz", { state: { selectedCharacters } })
+      navigate("/quiz", { state: { selectedCharacters, selectedGroups } })
     }
   }
 
@@ -74,6 +87,10 @@ export const Home = () => {
             onGroupToggle={handleGroupToggle}
             selectedGroups={selectedGroups}
           />
+          <Syllables
+            onGroupToggle={handleGroupToggle}
+            selectedGroups={selectedGroups}
+          />
           <div
             className={`${styles["home-container__content__start-quiz"]} ${
               selectedGroups.length === 0 ? styles.disabled : ""
@@ -91,6 +108,33 @@ export const Home = () => {
           questions
         </span>
       </div>
+
+      {showSyllablesWarning && (
+        <div
+          className={styles["home-container__modal-overlay"]}
+          onClick={() => setShowSyllablesWarning(false)}
+        >
+          <div
+            className={styles["home-container__modal"]}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <span className={styles["home-container__modal__title"]}>
+              Syllables Practice Notice
+            </span>
+            <span className={styles["home-container__modal__text"]}>
+              Korean has many possible syllables, and this app includes a
+              limited set for focused practice. For deeper learning, use books,
+              Korean texts, and other real-world reading materials.
+            </span>
+            <div
+              className={styles["home-container__modal__button"]}
+              onClick={() => setShowSyllablesWarning(false)}
+            >
+              I Understand
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
