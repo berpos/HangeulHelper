@@ -31,7 +31,7 @@
 }
 
 .home-container {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background-color: #f9f9fa;
   display: flex;
@@ -39,6 +39,7 @@
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  padding: 2rem 1rem;
 
   &__header-container {
     display: flex;
@@ -85,7 +86,7 @@
     border-radius: 1rem;
     padding: 2rem;
     height: auto;
-    min-width: 40rem;
+    width: min(40rem, 100%);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
     &__title {
@@ -124,10 +125,60 @@
   &__footer {
     font-size: 1.1rem;
     color: #838383;
+    text-align: center;
+    max-width: 40rem;
   }
 }
 
 .disabled {
   cursor: default;
   opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    justify-content: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+
+    &__header-container {
+      &__title {
+        font-size: 2rem;
+      }
+
+      &__subtitle {
+        font-size: 1.1rem;
+      }
+
+      &__book {
+        width: 4.2rem;
+        height: 4.2rem;
+
+        & > img {
+          width: 3.2rem;
+          height: 3.2rem;
+        }
+      }
+    }
+
+    &__content {
+      padding: 1.2rem;
+
+      &__title {
+        font-size: 1.25rem;
+      }
+
+      &__subtitle {
+        font-size: 0.95rem;
+      }
+
+      &__start-quiz {
+        font-size: 1.05rem;
+      }
+    }
+
+    &__footer {
+      font-size: 0.95rem;
+    }
+  }
 }

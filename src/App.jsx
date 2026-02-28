@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { Analytics } from "@vercel/analytics/react"
 import "./App.scss"
 import { Home } from "./pages/home/Home"
 import { Quiz } from "./pages/quiz/Quiz"
@@ -12,6 +13,7 @@ export const App = () => {
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/results" element={<Results />} />
       </Routes>
+      <Analytics />
     </Router>
   )
 }
