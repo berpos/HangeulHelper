@@ -167,6 +167,36 @@
       color: #777;
       font-size: 0.9rem;
     }
+
+    &__facts {
+      margin-top: 1rem;
+      text-align: left;
+      border: 1px solid #e8e8e8;
+      border-radius: 0.75rem;
+      padding: 0.9rem;
+      background-color: #fafcff;
+
+      &__title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 0.45rem;
+      }
+
+      &__list {
+        margin: 0;
+        padding-left: 1.1rem;
+        color: #555;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+
+        li {
+          font-size: 0.9rem;
+          line-height: 1.35;
+        }
+      }
+    }
   }
 }
 

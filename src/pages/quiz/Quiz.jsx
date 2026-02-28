@@ -6,7 +6,7 @@ import icoBack from "../../assets/ico-back.svg"
 export const Quiz = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { selectedCharacters } = location.state || {}
+  const { selectedCharacters, selectedGroups = [] } = location.state || {}
 
   const [questions, setQuestions] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -76,7 +76,7 @@ export const Quiz = () => {
       setSelectedAnswer(null)
       setShowResult(false)
     } else {
-      navigate("/results", { state: { score } })
+      navigate("/results", { state: { score, selectedGroups } })
     }
   }
 
@@ -118,11 +118,10 @@ export const Quiz = () => {
 
       <div className={styles["quiz-container__question"]}>
         <div className={styles["quiz-container__question__character"]}>
-          {console.log(current.character)}
           {current.character.char}
         </div>
         <p className={styles["quiz-container__question__subtitle"]}>
-          What is the sound of this character?
+          What is the sound of this character or syllable?
         </p>
       </div>
 

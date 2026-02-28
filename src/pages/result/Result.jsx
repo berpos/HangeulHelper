@@ -10,7 +10,10 @@ export const Results = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const { score } = location.state || { score: { correct: 0, incorrect: 0 } }
+  const { score, selectedGroups = [] } = location.state || {
+    score: { correct: 0, incorrect: 0 },
+    selectedGroups: [],
+  }
   const { correct, incorrect } = score
 
   const total = correct + incorrect
@@ -45,6 +48,36 @@ export const Results = () => {
   }
 
   const performance = getPerformanceMessage()
+
+  const getLearningFacts = () => {
+    const facts = [
+      "Hangeul syllables are built in blocks, usually initial consonant + vowel (+ optional final consonant).",
+      "A complete Hangeul syllable can be represented as choseong + jungseong + jongseong.",
+      "Korean writing is read left to right, but each syllable block is read as one unit.",
+    ]
+
+    if (selectedGroups.includes("consonants")) {
+      facts.push(
+        "Consonants change sound by position: for example, ㄱ can sound like g or k depending on context.",
+      )
+    }
+
+    if (selectedGroups.includes("vowels")) {
+      facts.push(
+        "Complex vowels are combinations of simple vowels, like ㅘ (wa) = ㅗ + ㅏ.",
+      )
+    }
+
+    if (selectedGroups.includes("syllables")) {
+      facts.push(
+        "Modern Hangeul has 11,172 possible precomposed syllable blocks (from 가 to 힣).",
+      )
+    }
+
+    return facts
+  }
+
+  const learningFacts = getLearningFacts()
 
   const handleRestart = () => navigate(-1)
   const handleHome = () => navigate("/")
@@ -132,6 +165,16 @@ export const Results = () => {
             ? "Regular practice makes perfect! Keep going!"
             : "Great job! You're mastering Korean characters!"}
         </span>
+        <div className={styles["results-container__card__facts"]}>
+          <div className={styles["results-container__card__facts__title"]}>
+            Hangeul Facts
+          </div>
+          <ul className={styles["results-container__card__facts__list"]}>
+            {learningFacts.map((fact, index) => (
+              <li key={index}>{fact}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   )
